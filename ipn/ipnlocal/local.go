@@ -491,10 +491,6 @@ type LocalBackend struct {
 	// It is used to prevent goroutines from piling up to do the same
 	// work of [LocalBackend.authReconfigLocked].
 	existsPendingAuthReconfig atomic.Bool
-
-	cfg  *wgcfg.Config
-	rcfg *router.Config
-	dcfg *dns.Config
 }
 
 // SetHardwareAttested enables hardware attestation key signatures in map
@@ -6334,10 +6330,6 @@ func (b *LocalBackend) authReconfigLocked() {
 	if buildfeatures.HasAppConnectors {
 		go b.goTracker.Go(b.readvertiseAppConnectorRoutes)
 	}
-
-	b.cfg = cfg
-	b.rcfg = rcfg
-	b.dcfg = dcfg
 }
 
 // setDataPlanePeerRoutes pushes the route manager's outbound table and
