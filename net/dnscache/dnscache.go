@@ -30,7 +30,6 @@ import (
 	"github.com/sagernet/tailscale/util/clientmetric"
 	"github.com/sagernet/tailscale/util/cloudenv"
 	"github.com/sagernet/tailscale/util/singleflight"
-	"github.com/sagernet/tailscale/util/testenv"
 )
 
 // HookSetCacheDir optionally points to the dnsresolvecache feature's
@@ -346,11 +345,10 @@ func (r *Resolver) lookupIP(ctx context.Context, host string) (ip, ip6 netip.Add
 
 	lookupCtx, lookupCancel := context.WithTimeout(ctx, r.lookupTimeoutForHost(host))
 	defer lookupCancel()
-
 	var ips []netip.Addr
 	src := srcForward
-	if r.LookupIPForTest != nil && testenv.InTest() {
-		ips, err = r.LookupIPForTest(ctx, host)
+	if r.LookupHook != nil {
+		ips, err = r.LookupHook(lookupCtx, host)
 	} else {
 		ips, err = r.fwd().LookupNetIP(lookupCtx, "ip", host)
 		if err != nil || len(ips) == 0 {
@@ -372,7 +370,7 @@ func (r *Resolver) lookupIP(ctx context.Context, host string) (ip, ip6 netip.Add
 			}
 		}
 	}
-	if (err != nil || len(ips) == 0) && r.LookupIPFallback != nil {
+	if (err != nil || len(ips) == 0) && r.LookupIPFallback != nil && r.LookupHook == nil {
 		lookupCtx, lookupCancel := context.WithTimeout(ctx, 30*time.Second)
 		defer lookupCancel()
 		if err != nil {
