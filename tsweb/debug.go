@@ -65,11 +65,6 @@ func Debugger(mux *http.ServeMux) *DebugHandler {
 	if f, ok := hookRuntimeMetrics.GetOk(); ok {
 		f(ret)
 	}
-	if PrometheusHandler.IsSet() {
-		PrometheusHandler.Get()(ret)
-	} else {
-		ret.Handle("varz", "Metrics (Prometheus)", http.HandlerFunc(varz.Handler))
-	}
 
 	addProfilingHandlers(ret)
 	ret.Handle("gc", "force GC", http.HandlerFunc(gcHandler))
