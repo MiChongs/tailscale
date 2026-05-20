@@ -52,14 +52,13 @@ import (
 // the local host.
 var initListenConfig func(config *net.ListenConfig, addr netip.Addr, tunIfIndex int) error
 
-// peerDNSQueryHandler is implemented by tsdns.Resolver.
-type peerDNSQueryHandler interface {
+type PeerDNSQueryHandler interface {
 	HandlePeerDNSQuery(context.Context, []byte, netip.AddrPort, func(name string) bool) (res []byte, err error)
 }
 
 type peerAPIServer struct {
 	b        *LocalBackend
-	resolver peerDNSQueryHandler
+	resolver PeerDNSQueryHandler
 }
 
 // skipKernelListener reports whether peerapi should not create a
@@ -849,7 +848,11 @@ func offersExitNodeOrAppConnectorAndPeerHasAutogroupInternet(h PeerAPIHandler, _
 // handleDNSQuery implements a DoH server (RFC 8484) over the peerapi.
 // It's not over HTTPS as the spec dictates, but rather HTTP-over-WireGuard.
 func (h *peerAPIHandler) handleDNSQuery(w http.ResponseWriter, r *http.Request) {
-	if !buildfeatures.HasDNS || h.ps.resolver == nil {
+	resolver := h.ps.resolver
+	if h.ps.b.peerDNSHandler != nil {
+		resolver = h.ps.b.peerDNSHandler
+	}
+	if !buildfeatures.HasDNS || resolver == nil {
 		http.Error(w, "DNS not wired up", http.StatusNotImplemented)
 		return
 	}
@@ -883,7 +886,7 @@ func (h *peerAPIHandler) handleDNSQuery(w http.ResponseWriter, r *http.Request) 
 
 	ctx, cancel := context.WithTimeout(r.Context(), arbitraryTimeout)
 	defer cancel()
-	res, err := h.ps.resolver.HandlePeerDNSQuery(ctx, q, h.remoteAddr, nameAllowed)
+	res, err := resolver.HandlePeerDNSQuery(ctx, q, h.remoteAddr, nameAllowed)
 	if err != nil {
 		h.logf("handleDNS fwd error: %v", err)
 		if err := ctx.Err(); err != nil {
