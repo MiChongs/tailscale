@@ -8,7 +8,7 @@ package wgcfg
 import (
 	"runtime"
 
-	"github.com/tailscale/wireguard-go/device"
+	"github.com/sagernet/wireguard-go/device"
 )
 
 func getMemoryOptions() []device.Option {

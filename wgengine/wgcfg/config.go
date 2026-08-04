@@ -9,7 +9,7 @@ import (
 	"slices"
 
 	"github.com/sagernet/tailscale/types/key"
-	"github.com/tailscale/wireguard-go/device"
+	"github.com/sagernet/wireguard-go/device"
 )
 
 //go:generate go run tailscale.com/cmd/cloner -type=Config

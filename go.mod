@@ -49,6 +49,7 @@ require (
 	github.com/prometheus/common v0.71.0
 	github.com/safchain/ethtool v0.7.0
 	github.com/sagernet/gvisor v0.0.0-20260727.0-sing-box-mod.1
+	github.com/sagernet/wireguard-go v0.0.20201121
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/sourcegraph/go-diff v0.9.0
 	github.com/tailscale/certstore v0.1.1-0.20260409135935-3638fb84b77d
@@ -57,7 +58,6 @@ require (
 	github.com/tailscale/netlink v1.1.1-0.20240822203006-4d49adab4de7
 	github.com/tailscale/peercred v0.0.0-20250107143737-35a0c7bd7edc
 	github.com/tailscale/web-client-prebuilt v0.0.0-20260917222731-e0ed2d0d0fea
-	github.com/tailscale/wireguard-go v0.0.0-20261106233718-9e0ab45c16ca
 	github.com/tailscale/xnet v0.0.0-20240729143630-8497ac4dab2e
 	github.com/toqueteos/webbrowser v1.2.1
 	go4.org/mem v0.0.0-20240501181205-ae6ca9944745
@@ -250,6 +250,7 @@ require (
 	github.com/ryancurrah/gomodguard v1.4.1 // indirect
 	github.com/ryancurrah/gomodguard/v2 v2.1.3 // indirect
 	github.com/ryanrolds/sqlclosecheck v0.6.0 // indirect
+	github.com/sagernet/sing v0.7.10 // indirect
 	github.com/sagikazarmark/locafero v0.11.0 // indirect
 	github.com/sanposhiho/wastedassign/v2 v2.1.0 // indirect
 	github.com/santhosh-tekuri/jsonschema/v6 v6.0.3 // indirect
@@ -304,7 +305,6 @@ require (
 	google.golang.org/protobuf v1.36.12 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.5.2 // indirect
-	gvisor.dev/gvisor v0.0.0-20260915211658-a6f909f08a72 // indirect
 	honnef.co/go/tools v0.8.1 // indirect
 	mvdan.cc/gofumpt v0.12.0 // indirect
 	mvdan.cc/unparam v0.0.0-20260823230713-2fa3d841b0c8 // indirect
@@ -315,3 +315,5 @@ tool (
 	github.com/golangci/golangci-lint/v2/cmd/golangci-lint
 	github.com/stacklok/frizbee
 )
+
+replace github.com/sagernet/wireguard-go => ../wireguard-go

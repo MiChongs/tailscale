@@ -15,6 +15,12 @@ import (
 	"sync"
 
 	"github.com/insomniacslk/dhcp/dhcpv4"
+	"github.com/sagernet/gvisor/pkg/tcpip"
+	"github.com/sagernet/gvisor/pkg/tcpip/checksum"
+	"github.com/sagernet/gvisor/pkg/tcpip/header"
+	"github.com/sagernet/gvisor/pkg/tcpip/network/ipv4"
+	"github.com/sagernet/gvisor/pkg/tcpip/network/ipv6"
+	"github.com/sagernet/gvisor/pkg/tcpip/transport/udp"
 	"github.com/sagernet/tailscale/feature"
 	"github.com/sagernet/tailscale/net/netaddr"
 	"github.com/sagernet/tailscale/net/packet"
@@ -23,14 +29,8 @@ import (
 	"github.com/sagernet/tailscale/syncs"
 	"github.com/sagernet/tailscale/types/ipproto"
 	"github.com/sagernet/tailscale/types/logger"
-	"github.com/tailscale/wireguard-go/tun"
+	"github.com/sagernet/wireguard-go/tun"
 	"golang.org/x/sys/unix"
-	"github.com/sagernet/gvisor/pkg/tcpip"
-	"github.com/sagernet/gvisor/pkg/tcpip/checksum"
-	"github.com/sagernet/gvisor/pkg/tcpip/header"
-	"github.com/sagernet/gvisor/pkg/tcpip/network/ipv4"
-	"github.com/sagernet/gvisor/pkg/tcpip/network/ipv6"
-	"github.com/sagernet/gvisor/pkg/tcpip/transport/udp"
 )
 
 // TODO: this was randomly generated once. Maybe do it per process start? But
