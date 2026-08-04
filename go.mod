@@ -48,6 +48,7 @@ require (
 	github.com/prometheus/client_golang v1.24.1
 	github.com/prometheus/common v0.71.0
 	github.com/safchain/ethtool v0.7.0
+	github.com/sagernet/gvisor v0.0.0-20260727.0-sing-box-mod.1
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/sourcegraph/go-diff v0.9.0
 	github.com/tailscale/certstore v0.1.1-0.20260409135935-3638fb84b77d
@@ -73,7 +74,6 @@ require (
 	golang.org/x/time v0.16.0
 	golang.org/x/tools v0.51.0
 	golang.zx2c4.com/wireguard/windows v1.0.1
-	gvisor.dev/gvisor v0.0.0-20260915211658-a6f909f08a72
 )
 
 require (
@@ -304,6 +304,7 @@ require (
 	google.golang.org/protobuf v1.36.12 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.5.2 // indirect
+	gvisor.dev/gvisor v0.0.0-20260915211658-a6f909f08a72 // indirect
 	honnef.co/go/tools v0.8.1 // indirect
 	mvdan.cc/gofumpt v0.12.0 // indirect
 	mvdan.cc/unparam v0.0.0-20260823230713-2fa3d841b0c8 // indirect
