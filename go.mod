@@ -12,7 +12,6 @@ require (
 	github.com/cilium/ebpf v0.22.0
 	github.com/coder/websocket v1.8.15
 	github.com/coreos/go-iptables v0.8.0
-	github.com/creachadair/msync v0.10.1
 	github.com/creachadair/taskgroup v0.14.4
 	github.com/dblohm7/wingoes v0.0.0-20260526185140-fb298caac7ca
 	github.com/digitalocean/go-smbios v0.0.0-20180907143718-390a4f403a8e
