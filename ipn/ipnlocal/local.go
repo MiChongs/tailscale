@@ -1419,6 +1419,13 @@ func (b *LocalBackend) shutdown() {
 	if cc != nil {
 		cc.Shutdown()
 	}
+	b.mu.Lock()
+	if b.nmExpiryTimer != nil {
+		b.nmExpiryTimer.Stop()
+		b.nmExpiryTimer = nil
+		b.numClientStatusCalls.Add(1)
+	}
+	b.mu.Unlock()
 	if buildfeatures.HasRuntimeMetrics {
 		// We disable runtime metrics _after_ the control client is shutdown to
 		// ensure we don't leak the metrics polling goroutine in the case where
