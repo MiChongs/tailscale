@@ -39,8 +39,8 @@ func (t *Wrapper) SetInputDevice(dev *device.Device) {
 // inbound filter.
 func (t *Wrapper) SetReturnPath(returnPath ReturnPath) error {
 	headroom := returnPath.ReturnHeadroom()
-	if headroom > PacketStartOffset {
-		return fmt.Errorf("return path headroom %d exceeds PacketStartOffset %d", headroom, PacketStartOffset)
+	if headroom > WritePacketStartOffset {
+		return fmt.Errorf("return path headroom %d exceeds WritePacketStartOffset %d", headroom, WritePacketStartOffset)
 	}
 	t.returnPath.Store(&returnPathState{returnPath: returnPath, headroom: headroom})
 	return nil
@@ -81,7 +81,7 @@ func (t *Wrapper) InputPackets(packets [][]byte) ([][]byte, error) {
 		}
 		p.Decode(pkt)
 		if !t.disableFilter {
-			response, _ := t.filterPacketOutboundToWireGuard(p, pc, nil)
+			response := t.filterPacketOutboundToWireGuard(p, pc)
 			if response != filter.Accept {
 				metricPacketOutDrop.Add(1)
 				continue
