@@ -172,6 +172,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"syscall"
 	"time"
 
 	singtun "github.com/sagernet/sing-tun"
@@ -346,7 +347,10 @@ type Server struct {
 	// custom Tun device. If nil while Tun is set, a system router is created.
 	Router router.Router
 
-	Dialer N.Dialer
+	Dialer           N.Dialer
+	ControlFunc      func(network, address string, conn syscall.RawConn) error
+	ListenPacketFunc func(ctx context.Context, network, address string) (nettype.PacketConn, error)
+	DefaultRouteFunc func() (netmon.DefaultRouteDetails, error)
 
 	LookupHook          dnscache.LookupHookFunc
 	PeerDNSQueryHandler ipnlocal.PeerDNSQueryHandler
@@ -886,7 +890,7 @@ func (s *Server) start() (reterr error) {
 		return err
 	}
 
-	s.netMon, err = netmon.New(sys.Bus.Get(), tsLogf, s.Dialer)
+	s.netMon, err = netmon.New(sys.Bus.Get(), tsLogf, netmon.Hooks{Dialer: s.Dialer, Control: s.ControlFunc, ListenPacket: s.ListenPacketFunc, DefaultRoute: s.DefaultRouteFunc})
 	if err != nil {
 		return err
 	}
