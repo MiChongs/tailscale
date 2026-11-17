@@ -39,6 +39,7 @@ import (
 	"github.com/sagernet/tailscale/types/netmap"
 	"github.com/sagernet/tailscale/types/nettype"
 	"github.com/sagernet/tailscale/types/views"
+	"github.com/sagernet/tailscale/util/clientmetric"
 	"github.com/sagernet/tailscale/util/set"
 	"github.com/sagernet/tailscale/version"
 	"github.com/sagernet/tailscale/wgengine/filter"
@@ -417,6 +418,13 @@ func (ns *Impl) NewConnectionEx(ctx context.Context, conn net.Conn, source, dest
 		return
 	}
 	local := ns.isLocalIP(destination.Addr)
+	if viaRange.Contains(destination.Addr) && !ns.shouldForwardToVia(destination.Addr) {
+		metricViaHostScopedDrop.Add(1)
+		ns.logf("netstack: rejecting TCP connection to host-scoped 4via6 target %v from %v",
+			netip.AddrPortFrom(tsaddr.UnmapVia(destination.Addr), destination.Port), source)
+		N.CloseOnHandshakeFailure(conn, onClose, E.New("netstack: connection refused"))
+		return
+	}
 	dialAddress := tsaddr.UnmapVia(destination.Addr)
 	if service && destination.Addr == serviceIPv6 {
 		dialAddress = ipv6Loopback
@@ -486,6 +494,12 @@ func (ns *Impl) NewPacketConnectionEx(ctx context.Context, conn N.PacketConn, so
 		return
 	}
 	defer conn.Close()
+	if viaRange.Contains(destination.Addr) && !ns.shouldForwardToVia(destination.Addr) {
+		metricViaHostScopedDrop.Add(1)
+		ns.logf("netstack: dropping UDP flow to host-scoped 4via6 target %v from %v",
+			netip.AddrPortFrom(tsaddr.UnmapVia(destination.Addr), destination.Port), source)
+		return
+	}
 	local := ns.isLocalIP(destination.Addr)
 	remote := destination
 	remote.Addr = tsaddr.UnmapVia(remote.Addr)
@@ -708,6 +722,16 @@ func (ns *Impl) injectInbound(p *packet.Parsed, t *tstun.Wrapper) filter.Respons
 	return filter.DropSilently
 }
 
+// metricViaHostScopedDrop counts refused 4via6 forwards to host-scoped targets.
+var metricViaHostScopedDrop = clientmetric.NewCounter("netstack_via_host_scoped_dropped")
+
+// shouldForwardToVia reports whether a flow to the 4via6 destination via may
+// be forwarded to the embedded IPv4 target. The packet filter only sees the
+// outer via address, so this is the sole check on the embedded target.
+func (ns *Impl) shouldForwardToVia(via netip.Addr) bool {
+	return ns.lb != nil && ns.lb.ShouldForwardToVia(via)
+}
+
 func (ns *Impl) shouldHandlePing(p *packet.Parsed) (_ netip.Addr, ok bool) {
 	if !p.IsEchoRequest() {
 		return netip.Addr{}, false
@@ -716,6 +740,13 @@ func (ns *Impl) shouldHandlePing(p *packet.Parsed) (_ netip.Addr, ok bool) {
 	destIP := p.Dst.Addr()
 
 	if viaRange.Contains(destIP) {
+		if !ns.shouldForwardToVia(destIP) {
+			// Don't relay pings to host-scoped targets: a relayed reply
+			// would reveal which LAN addresses are reachable from this
+			// node, aiding network reconnaissance.
+			metricViaHostScopedDrop.Add(1)
+			return netip.Addr{}, false
+		}
 		return tsaddr.UnmapVia(destIP), true
 	}
 
