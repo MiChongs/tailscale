@@ -81,14 +81,14 @@ func EnvDisabled() []string {
 // tree. The name of a package under it is the first path element after
 // the prefix, so sub-packages of a feature (such as
 // feature/captiveportal/netcheckhook) count as their parent feature.
-const featurePkgPrefix = "tailscale.com/feature/"
+const featurePkgPrefix = "github.com/sagernet/tailscale/feature/"
 
 // mechanismPkgPrefix is the prefix of symbol names belonging to the
 // registration machinery itself (this package), which the stack walk
 // in callerFeatureName steps over to find the registering feature. It
-// matches both plain functions (tailscale.com/feature.callerFeatureName)
-// and methods (tailscale.com/feature.(*Hook[...]).Set).
-const mechanismPkgPrefix = "tailscale.com/feature."
+// matches both plain functions (github.com/sagernet/tailscale/feature.callerFeatureName)
+// and methods (github.com/sagernet/tailscale/feature.(*Hook[...]).Set).
+const mechanismPkgPrefix = "github.com/sagernet/tailscale/feature."
 
 // callerFeatureDisabled reports whether the feature package calling
 // into this package has been disabled via TS_DISABLE_FEATURE. It backs
