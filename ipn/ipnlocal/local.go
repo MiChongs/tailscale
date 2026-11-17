@@ -45,6 +45,7 @@ import (
 	"github.com/sagernet/tailscale/health/healthmsg"
 	"github.com/sagernet/tailscale/hostinfo"
 	"github.com/sagernet/tailscale/ipn"
+	godownipn "github.com/sagernet/tailscale/ipn"
 	"github.com/sagernet/tailscale/ipn/conffile"
 	"github.com/sagernet/tailscale/ipn/ipnauth"
 	"github.com/sagernet/tailscale/ipn/ipnext"
@@ -2032,7 +2033,7 @@ func (b *LocalBackend) setControlClientStatusLocked(c controlclient.Client, st c
 			b.logf("Failed to save new controlclient state: %v", err)
 		}
 
-		b.sendToLocked(ipn.Notify{Prefs: new(prefs.View())}, allClients)
+		b.sendToLocked(ipn.Notify{Prefs: func() *godownipn.PrefsView { godownValue := prefs.View(); return &godownValue }()}, allClients)
 	}
 
 	// initTKALocked is dependent on CurrentProfile.ID, which is initialized
@@ -3949,13 +3950,13 @@ func (b *LocalBackend) buildInitialNotifyLocked(sb *ipnstate.StatusBuilder, sess
 	ini := &ipn.Notify{Version: version.Long()}
 	if mask&ipn.NotifyInitialState != 0 {
 		ini.SessionID = sess.sessionID
-		ini.State = new(b.state)
+		ini.State = func() *godownipn.State { godownValue := b.state; return &godownValue }()
 		if b.state == ipn.NeedsLogin && b.authURL != "" {
-			ini.BrowseToURL = new(b.authURL)
+			ini.BrowseToURL = func() *string { godownValue := b.authURL; return &godownValue }()
 		}
 	}
 	if mask&ipn.NotifyInitialPrefs != 0 {
-		ini.Prefs = new(b.sanitizedPrefsLocked())
+		ini.Prefs = func() *godownipn.PrefsView { godownValue := b.sanitizedPrefsLocked(); return &godownValue }()
 	}
 	if sb != nil {
 		b.updateStatusLocked(sb)
@@ -4221,7 +4222,7 @@ func (b *LocalBackend) sendTo(n ipn.Notify, recipient notificationTarget) {
 // back into LocalBackend from their notification callback.
 func (b *LocalBackend) sendToLocked(n ipn.Notify, recipient notificationTarget) {
 	if n.Prefs != nil {
-		n.Prefs = new(stripKeysFromPrefs(*n.Prefs))
+		n.Prefs = func() *godownipn.PrefsView { godownValue := stripKeysFromPrefs(*n.Prefs); return &godownValue }()
 	}
 	if n.Version == "" {
 		n.Version = version.Long()
@@ -5435,7 +5436,7 @@ func (b *LocalBackend) changeDisablesExitNodeLocked(prefs ipn.PrefsView, change 
 
 	// First, apply the adjustments to a copy of the changes,
 	// e.g., clear AutoExitNode if ExitNodeID is set.
-	tmpChange := new(*change)
+	tmpChange := func() *godownipn.MaskedPrefs { godownValue := *change; return &godownValue }()
 	tmpChange.Prefs = *change.Prefs.Clone()
 	b.adjustEditPrefsLocked(prefs, tmpChange)
 
@@ -7393,7 +7394,7 @@ func (b *LocalBackend) resolveExitNodeLocked() (changed bool) {
 		b.goTracker.Go(b.doSetHostinfoFilterServices)
 	}
 
-	b.sendToLocked(ipn.Notify{Prefs: new(prefs.View())}, allClients)
+	b.sendToLocked(ipn.Notify{Prefs: func() *godownipn.PrefsView { godownValue := prefs.View(); return &godownValue }()}, allClients)
 	return true
 }
 

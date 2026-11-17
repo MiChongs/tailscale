@@ -20,9 +20,9 @@ import (
 	"sync"
 	"time"
 
-	jsonv2 "github.com/go-json-experiment/json"
-	jsonv1 "github.com/go-json-experiment/json/v1"
 	"github.com/sagernet/tailscale/envknob"
+	jsonv2 "github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json"
+	jsonv1 "github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json/v1"
 	"github.com/sagernet/tailscale/util/ctxkey"
 	"github.com/sagernet/tailscale/util/testenv"
 	"go4.org/mem"

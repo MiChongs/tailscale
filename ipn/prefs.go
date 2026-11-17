@@ -22,6 +22,7 @@ import (
 	"github.com/sagernet/tailscale/atomicfile"
 	"github.com/sagernet/tailscale/drive"
 	"github.com/sagernet/tailscale/feature/buildfeatures"
+	godownreflect "github.com/sagernet/tailscale/internal/godown/std/reflect"
 	"github.com/sagernet/tailscale/ipn/ipnstate"
 	"github.com/sagernet/tailscale/net/netaddr"
 	"github.com/sagernet/tailscale/net/tsaddr"
@@ -441,7 +442,7 @@ func applyPrefsEdits(src, dst reflect.Value, mask map[string]reflect.Value) {
 
 func maskFields(v reflect.Value) map[string]reflect.Value {
 	mask := make(map[string]reflect.Value)
-	for sf, fv := range v.Fields() {
+	for sf, fv := range godownreflect.ValueFields(v) {
 		if !strings.HasSuffix(sf.Name, "Set") {
 			continue
 		}

@@ -6,8 +6,8 @@ package jsonformat
 import (
 	"time"
 
-	"github.com/go-json-experiment/json"
-	"github.com/go-json-experiment/json/jsontext"
+	"github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json"
+	"github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json/jsontext"
 )
 
 // DurationNano is a [time.Duration] that represents a duration as

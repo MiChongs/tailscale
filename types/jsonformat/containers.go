@@ -4,8 +4,8 @@
 package jsonformat
 
 import (
-	"github.com/go-json-experiment/json"
-	"github.com/go-json-experiment/json/jsontext"
+	"github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json"
+	"github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json/jsontext"
 )
 
 // SliceEmitEmpty is a generic slice where nil marshals as an empty JSON array.

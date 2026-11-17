@@ -27,9 +27,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	jsonv2 "github.com/go-json-experiment/json"
-	"github.com/go-json-experiment/json/jsontext"
 	"github.com/sagernet/tailscale/envknob"
+	jsonv2 "github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json"
+	"github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json/jsontext"
 	"github.com/sagernet/tailscale/metrics"
 	"github.com/sagernet/tailscale/net/netmon"
 	"github.com/sagernet/tailscale/net/sockstats"

@@ -30,6 +30,7 @@ import (
 	"github.com/sagernet/tailscale/types/logger"
 	"github.com/sagernet/tailscale/types/mapx"
 	"github.com/sagernet/tailscale/types/netmap"
+	godownnetmap "github.com/sagernet/tailscale/types/netmap"
 	"github.com/sagernet/tailscale/types/views"
 	"github.com/sagernet/tailscale/util/dnsname"
 	"github.com/sagernet/tailscale/util/eventbus"
@@ -637,7 +638,7 @@ func (nb *nodeBackend) netMapWithPeers() *netmap.NetworkMap {
 	if nb.netMap == nil {
 		return nil
 	}
-	nm := new(*nb.netMap) // shallow clone
+	nm := func() *godownnetmap.NetworkMap { godownValue := *nb.netMap; return &godownValue }() // shallow clone
 	nm.Peers = slicesx.MapValues(nb.peers)
 	slices.SortFunc(nm.Peers, func(a, b tailcfg.NodeView) int {
 		return cmp.Compare(a.ID(), b.ID())

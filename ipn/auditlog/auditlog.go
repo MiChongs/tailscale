@@ -13,6 +13,7 @@ import (
 	"sync"
 	"time"
 
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/ipn"
 	"github.com/sagernet/tailscale/tailcfg"
 	"github.com/sagernet/tailscale/types/logger"
@@ -69,7 +70,7 @@ type Opts struct {
 // IsRetryableError returns true if the given error is retryable
 // See [controlclient.apiResponseError].  Potentially retryable errors implement the Retryable() method.
 func IsRetryableError(err error) bool {
-	retryable, ok := errors.AsType[interface {
+	retryable, ok := godownerrors.AsType[interface {
 		error
 		Retryable() bool
 	}](err)

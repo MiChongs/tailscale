@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"time"
 
-	jsonv2 "github.com/go-json-experiment/json"
-	jsonv1 "github.com/go-json-experiment/json/v1"
+	jsonv2 "github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json"
+	jsonv1 "github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json/v1"
 	"github.com/sagernet/tailscale/ipn/ipnlocal"
 	"github.com/sagernet/tailscale/ipn/localapi"
 	"github.com/sagernet/tailscale/net/routecheck"

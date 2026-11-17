@@ -29,6 +29,7 @@ import (
 	"time"
 
 	"github.com/sagernet/tailscale/envknob"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/metrics"
 	"github.com/sagernet/tailscale/net/tsaddr"
 	"github.com/sagernet/tailscale/tsweb/varz"
@@ -790,9 +791,9 @@ func (h errorHandler) handleError(w http.ResponseWriter, r *http.Request, lw *lo
 
 	// Extract a presentable, loggable error.
 	var hOK bool
-	hErr, hAsOK := errors.AsType[HTTPError](err)
+	hErr, hAsOK := godownerrors.AsType[HTTPError](err)
 	if !hAsOK {
-		if hs, ok := errors.AsType[HTTPStatuser](err); ok {
+		if hs, ok := godownerrors.AsType[HTTPStatuser](err); ok {
 			hErr = hs.HTTPStatus()
 			hAsOK = true
 		}

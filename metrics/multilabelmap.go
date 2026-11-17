@@ -6,6 +6,7 @@ package metrics
 import (
 	"expvar"
 	"fmt"
+	godownreflect "github.com/sagernet/tailscale/internal/godown/std/reflect"
 	"io"
 	"reflect"
 	"sort"
@@ -64,7 +65,7 @@ func LabelString(k any) string {
 	sb.WriteString("{")
 
 	first := true
-	for ft, fv := range rv.Fields() {
+	for ft, fv := range godownreflect.ValueFields(rv) {
 		if !first {
 			sb.WriteString(",")
 		}

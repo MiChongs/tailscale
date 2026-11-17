@@ -15,13 +15,14 @@ import (
 	"unicode"
 
 	"github.com/coreos/go-iptables/iptables"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/types/logger"
 	"github.com/sagernet/tailscale/version/distro"
 )
 
 func init() {
 	isNotExistError = func(err error) bool {
-		e, ok := errors.AsType[*iptables.Error](err)
+		e, ok := godownerrors.AsType[*iptables.Error](err)
 		return ok && e.IsNotExist()
 	}
 }

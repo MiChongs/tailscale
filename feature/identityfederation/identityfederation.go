@@ -17,6 +17,7 @@ import (
 
 	"github.com/sagernet/tailscale/feature"
 	"github.com/sagernet/tailscale/internal/client/tailscale"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/ipn"
 	"golang.org/x/oauth2"
 )
@@ -126,7 +127,7 @@ func exchangeJWTForToken(ctx context.Context, args tailscale.ExchangeJWTForToken
 	}).Exchange(ctx, "", oauth2.SetAuthURLParam("client_id", args.ClientID), oauth2.SetAuthURLParam("jwt", args.IDToken))
 	if err != nil {
 		// Try to extract more detailed error message
-		if retrieveErr, ok := errors.AsType[*oauth2.RetrieveError](err); ok {
+		if retrieveErr, ok := godownerrors.AsType[*oauth2.RetrieveError](err); ok {
 			return "", fmt.Errorf("token exchange failed with status %d: %s", retrieveErr.Response.StatusCode, string(retrieveErr.Body))
 		}
 		return "", fmt.Errorf("unexpected token exchange request error: %w", err)

@@ -32,6 +32,7 @@ import (
 	"github.com/sagernet/tailscale/feature/condlite/expvar"
 	"github.com/sagernet/tailscale/health"
 	"github.com/sagernet/tailscale/hostinfo"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/ipn/ipnstate"
 	"github.com/sagernet/tailscale/net/batching"
 	"github.com/sagernet/tailscale/net/dnscache"
@@ -1587,7 +1588,7 @@ func (c *Conn) sendUDPBatch(addr epAddr, buffs [][]byte, offset int) (sent bool,
 		err = c.pconn4.WriteWireGuardBatchTo(buffs, addr, offset)
 	}
 	if err != nil {
-		if errGSO, ok := errors.AsType[neterror.ErrUDPGSODisabled](err); ok {
+		if errGSO, ok := godownerrors.AsType[neterror.ErrUDPGSODisabled](err); ok {
 			c.logf("magicsock: %s", errGSO.Error())
 			err = errGSO.RetryErr
 		} else {

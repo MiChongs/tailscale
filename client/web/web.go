@@ -29,6 +29,7 @@ import (
 	"github.com/sagernet/tailscale/feature"
 	"github.com/sagernet/tailscale/feature/buildfeatures"
 	"github.com/sagernet/tailscale/hostinfo"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/ipn"
 	"github.com/sagernet/tailscale/ipn/ipnstate"
 	"github.com/sagernet/tailscale/licenses"
@@ -539,7 +540,7 @@ func handleJSON[data any](h func(ctx context.Context, data data) error) http.Han
 			return
 		}
 		if err := h(r.Context(), body); err != nil {
-			if httpErr, ok := errors.AsType[tsweb.HTTPError](err); ok {
+			if httpErr, ok := godownerrors.AsType[tsweb.HTTPError](err); ok {
 				tsweb.WriteHTTPError(w, r, httpErr)
 			} else {
 				http.Error(w, err.Error(), http.StatusInternalServerError)

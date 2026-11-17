@@ -31,6 +31,7 @@ import (
 	"github.com/sagernet/tailscale/feature/buildfeatures"
 	"github.com/sagernet/tailscale/hostinfo"
 	"github.com/sagernet/tailscale/ipn"
+	godownipn "github.com/sagernet/tailscale/ipn"
 	"github.com/sagernet/tailscale/ipn/ipnauth"
 	"github.com/sagernet/tailscale/ipn/ipnlocal"
 	"github.com/sagernet/tailscale/ipn/ipnstate"
@@ -878,8 +879,8 @@ func InUseOtherUserIPNStream(w http.ResponseWriter, r *http.Request, err error) 
 	}
 	js, err := json.Marshal(&ipn.Notify{
 		Version:    version.Long(),
-		State:      new(ipn.InUseOtherUser),
-		ErrMessage: new(err.Error()),
+		State:      func() *godownipn.State { godownValue := ipn.InUseOtherUser; return &godownValue }(),
+		ErrMessage: func() *string { godownValue := err.Error(); return &godownValue }(),
 	})
 	if err != nil {
 		return false

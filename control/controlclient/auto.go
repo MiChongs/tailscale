@@ -12,6 +12,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/net/sockstats"
 	"github.com/sagernet/tailscale/tailcfg"
 	"github.com/sagernet/tailscale/tstime"
@@ -94,7 +95,7 @@ func (c *Auto) updateRoutine() {
 			if ctx.Err() == nil {
 				c.direct.logf("lite map update error after %v: %v", d, err)
 			}
-			if rle, rateLimited := errors.AsType[*rateLimitError](err); rateLimited {
+			if rle, rateLimited := godownerrors.AsType[*rateLimitError](err); rateLimited {
 				c.waitRetryAfter(ctx, "updateRoutine", rle)
 			} else {
 				bo.BackOff(ctx, err)
@@ -366,7 +367,7 @@ func (c *Auto) authRoutine() {
 		if err != nil {
 			c.direct.health.SetAuthRoutineInError(err)
 			report(err, f)
-			if rle, ok := errors.AsType[*rateLimitError](err); ok {
+			if rle, ok := godownerrors.AsType[*rateLimitError](err); ok {
 				c.waitRetryAfter(ctx, "authRoutine", rle)
 			} else {
 				bo.BackOff(ctx, err)
@@ -630,7 +631,7 @@ func (c *Auto) mapRoutine() {
 		paused := c.paused
 		c.mu.Unlock()
 
-		rle, rateLimited := errors.AsType[*rateLimitError](err)
+		rle, rateLimited := godownerrors.AsType[*rateLimitError](err)
 
 		if paused {
 			mrs.bo.Reset()

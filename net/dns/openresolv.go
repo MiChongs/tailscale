@@ -7,13 +7,13 @@ package dns
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"net/netip"
 	"os/exec"
 	"slices"
 	"strings"
 
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/net/tsaddr"
 	"github.com/sagernet/tailscale/types/logger"
 )
@@ -65,7 +65,7 @@ func (m openresolvManager) readSnippets(args ...string) ([]byte, error) {
 	cmd := exec.Command("resolvconf", args...)
 	out, err := cmd.Output()
 	if err != nil {
-		if ee, ok := errors.AsType[*exec.ExitError](err); ok && ee.ExitCode() == openresolvNoSnippetsExitCode {
+		if ee, ok := godownerrors.AsType[*exec.ExitError](err); ok && ee.ExitCode() == openresolvNoSnippetsExitCode {
 			m.logf("[v1] resolvconf %q found no matching config snippets", args)
 			return nil, nil
 		}

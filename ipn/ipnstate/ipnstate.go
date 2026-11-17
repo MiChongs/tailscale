@@ -16,6 +16,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	godowntime "time"
 
 	"github.com/sagernet/tailscale/tailcfg"
 	"github.com/sagernet/tailscale/tailcfg/nodecap"
@@ -570,7 +571,7 @@ func (sb *StatusBuilder) AddPeer(peer key.NodePublic, st *PeerStatus) {
 		e.Expired = true
 	}
 	if t := st.KeyExpiry; t != nil {
-		e.KeyExpiry = new(*t)
+		e.KeyExpiry = func() *godowntime.Time { godownValue := *t; return &godownValue }()
 	}
 	if v := st.CapMap; v != nil {
 		e.CapMap = v

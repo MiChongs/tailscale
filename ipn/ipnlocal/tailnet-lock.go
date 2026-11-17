@@ -28,6 +28,7 @@ import (
 	"github.com/sagernet/tailscale/health/healthmsg"
 	"github.com/sagernet/tailscale/ipn"
 	"github.com/sagernet/tailscale/ipn/ipnstate"
+	godownipnstate "github.com/sagernet/tailscale/ipn/ipnstate"
 	"github.com/sagernet/tailscale/ipn/store/mem"
 	"github.com/sagernet/tailscale/net/tsaddr"
 	"github.com/sagernet/tailscale/tailcfg"
@@ -640,7 +641,7 @@ func (b *LocalBackend) TailnetLockStatus() *ipnstate.TailnetLockStatus {
 
 	var filtered []*ipnstate.TKAPeer
 	for _, fp := range b.tka.filtered {
-		filtered = append(filtered, new(fp))
+		filtered = append(filtered, func() *godownipnstate.TKAPeer { godownValue := fp; return &godownValue }())
 	}
 
 	var visible []*ipnstate.TKAPeer

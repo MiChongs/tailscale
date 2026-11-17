@@ -26,6 +26,7 @@ import (
 	"strconv"
 	"time"
 
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/syncs"
 	"github.com/sagernet/tailscale/types/logger"
 	"github.com/sagernet/tailscale/types/nettype"
@@ -281,7 +282,7 @@ func (c *Conn) handleTCP() error {
 	// unblock it. Nothing deliverable is lost: the dead socket has already
 	// returned everything it received, and anything from the live peer
 	// could not be delivered to it anyway.
-	if _, isDstErr := errors.AsType[dstError](err); !isDstErr {
+	if _, isDstErr := godownerrors.AsType[dstError](err); !isDstErr {
 		srv.Close()
 		c.clientConn.Close()
 	}

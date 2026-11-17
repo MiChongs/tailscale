@@ -65,7 +65,7 @@ func (src *Prefs) Clone() *Prefs {
 		}
 	}
 	if dst.RelayServerPort != nil {
-		dst.RelayServerPort = new(*src.RelayServerPort)
+		dst.RelayServerPort = func() *uint16 { godownValue := *src.RelayServerPort; return &godownValue }()
 	}
 	dst.RelayServerStaticEndpoints = append(src.RelayServerStaticEndpoints[:0:0], src.RelayServerStaticEndpoints...)
 	dst.Persist = src.Persist.Clone()
@@ -125,7 +125,7 @@ func (src *ServeConfig) Clone() *ServeConfig {
 			if v == nil {
 				dst.TCP[k] = nil
 			} else {
-				dst.TCP[k] = new(*v)
+				dst.TCP[k] = func() *TCPPortHandler { godownValue := *v; return &godownValue }()
 			}
 		}
 	}
@@ -187,7 +187,7 @@ func (src *ServiceConfig) Clone() *ServiceConfig {
 			if v == nil {
 				dst.TCP[k] = nil
 			} else {
-				dst.TCP[k] = new(*v)
+				dst.TCP[k] = func() *TCPPortHandler { godownValue := *v; return &godownValue }()
 			}
 		}
 	}

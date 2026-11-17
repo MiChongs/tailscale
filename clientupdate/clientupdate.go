@@ -31,6 +31,7 @@ import (
 	"github.com/sagernet/tailscale/envknob"
 	"github.com/sagernet/tailscale/feature"
 	"github.com/sagernet/tailscale/hostinfo"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/types/lazy"
 	"github.com/sagernet/tailscale/types/logger"
 	"github.com/sagernet/tailscale/util/cmpver"
@@ -1380,6 +1381,6 @@ func requireRoot() error {
 }
 
 func isExitError(err error) bool {
-	_, ok := errors.AsType[*exec.ExitError](err)
+	_, ok := godownerrors.AsType[*exec.ExitError](err)
 	return ok
 }

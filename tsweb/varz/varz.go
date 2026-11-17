@@ -22,6 +22,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	godownreflect "github.com/sagernet/tailscale/internal/godown/std/reflect"
 	"github.com/sagernet/tailscale/metrics"
 	"github.com/sagernet/tailscale/syncs"
 	"github.com/sagernet/tailscale/version"
@@ -403,7 +404,7 @@ func structTypeSortedFields(t reflect.Type) []sortedStructField {
 		return v.([]sortedStructField)
 	}
 	fields := make([]sortedStructField, 0, t.NumField())
-	for sf := range t.Fields() {
+	for sf := range godownreflect.TypeFields(t) {
 		name := sf.Name
 		if v := sf.Tag.Get("json"); v != "" {
 			v, _, _ = strings.Cut(v, ",")

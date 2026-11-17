@@ -6,7 +6,6 @@ package dns
 import (
 	"bytes"
 	"context"
-	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -16,6 +15,7 @@ import (
 	"time"
 
 	"github.com/sagernet/tailscale/health"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/types/logger"
 	"github.com/sagernet/tailscale/util/winutil"
 	"golang.org/x/sys/windows"
@@ -176,7 +176,7 @@ func (fs wslFS) Truncate(name string) error { return fs.WriteFile(name, nil, 0o6
 
 func (fs wslFS) ReadFile(name string) ([]byte, error) {
 	b, err := wslCombinedOutput(fs.cmd("cat", "--", name))
-	if ee, ok := errors.AsType[*exec.ExitError](err); ok && ee.ExitCode() == 1 {
+	if ee, ok := godownerrors.AsType[*exec.ExitError](err); ok && ee.ExitCode() == 1 {
 		return nil, os.ErrNotExist
 	}
 	return b, err

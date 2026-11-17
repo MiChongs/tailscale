@@ -4,15 +4,15 @@
 package neterror
 
 import (
-	"errors"
 	"os"
 
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"golang.org/x/sys/unix"
 )
 
 func init() {
 	shouldDisableUDPGSO = func(err error) bool {
-		if serr, ok := errors.AsType[*os.SyscallError](err); ok {
+		if serr, ok := godownerrors.AsType[*os.SyscallError](err); ok {
 			// EIO is returned by udp_send_skb() if the device driver does not
 			// have tx checksumming enabled, which is a hard requirement of
 			// UDP_SEGMENT. See:

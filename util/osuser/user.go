@@ -20,6 +20,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/version/distro"
 )
 
@@ -192,7 +193,7 @@ func getentFallback(name string, std lookupStd, getentErr error) (*user.User, st
 	}
 	// If getent is unavailable on this system, os/user is authoritative.
 	// Otherwise only exit 2 means the requested key was not found.
-	exit, _ := errors.AsType[*exec.ExitError](getentErr)
+	exit, _ := godownerrors.AsType[*exec.ExitError](getentErr)
 	if errors.Is(getentErr, exec.ErrNotFound) || (exit != nil && exit.ExitCode() == 2) {
 		return nil, "", err
 	}

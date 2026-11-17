@@ -39,6 +39,7 @@ import (
 	"github.com/sagernet/tailscale/envknob"
 	"github.com/sagernet/tailscale/feature"
 	"github.com/sagernet/tailscale/feature/buildfeatures"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/ipn"
 	"github.com/sagernet/tailscale/ipn/ipnstate"
 	"github.com/sagernet/tailscale/net/netutil"
@@ -223,7 +224,7 @@ func (e *AccessDeniedError) Unwrap() error { return e.err }
 
 // IsAccessDeniedError reports whether err is or wraps an AccessDeniedError.
 func IsAccessDeniedError(err error) bool {
-	_, ok := errors.AsType[*AccessDeniedError](err)
+	_, ok := godownerrors.AsType[*AccessDeniedError](err)
 	return ok
 }
 
@@ -241,7 +242,7 @@ func (e *PreconditionsFailedError) Unwrap() error { return e.err }
 
 // IsPreconditionsFailedError reports whether err is or wraps an PreconditionsFailedError.
 func IsPreconditionsFailedError(err error) bool {
-	_, ok := errors.AsType[*PreconditionsFailedError](err)
+	_, ok := godownerrors.AsType[*PreconditionsFailedError](err)
 	return ok
 }
 

@@ -24,6 +24,7 @@ import (
 
 	"github.com/sagernet/tailscale/feature"
 	"github.com/sagernet/tailscale/health"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"github.com/sagernet/tailscale/ipn"
 	"github.com/sagernet/tailscale/ipn/ipnext"
 	"github.com/sagernet/tailscale/ipn/ipnlocal"
@@ -202,7 +203,7 @@ func getCertPEMHook(ctx context.Context, b *ipnlocal.LocalBackend, domain string
 	}
 	pair, err := e.getCertPEMWithValidity(ctx, b, domain, minValidity)
 	if err != nil {
-		if ae, ok := errors.AsType[*xacme.Error](err); ok {
+		if ae, ok := godownerrors.AsType[*xacme.Error](err); ok {
 			if d, ok := xacme.RateLimit(ae); ok {
 				return nil, certRateLimitedError{retryAfter: d, underlying: err}
 			}

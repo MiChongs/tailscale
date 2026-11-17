@@ -5,15 +5,16 @@ package routecheck
 
 import (
 	"cmp"
+	godownnetip "github.com/sagernet/tailscale/internal/godown/std/net/netip"
 	"iter"
 	"maps"
 	"net/netip"
 	"slices"
 	"time"
 
-	jsonv2 "github.com/go-json-experiment/json"
-	"github.com/go-json-experiment/json/jsontext"
-	jsonv1 "github.com/go-json-experiment/json/v1"
+	jsonv2 "github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json"
+	"github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json/jsontext"
+	jsonv1 "github.com/sagernet/tailscale/internal/godown/github.com/go-json-experiment/json/v1"
 	"github.com/sagernet/tailscale/net/routecheck/peernode"
 	"github.com/sagernet/tailscale/tailcfg"
 	"github.com/sagernet/tailscale/util/clientmetric"
@@ -152,7 +153,7 @@ type RoutablePrefixes map[netip.Prefix][]Node
 // ordered by the network prefix as described in [netip.Prefix.Compare].
 func (rt RoutablePrefixes) Sorted() iter.Seq2[netip.Prefix, []Node] {
 	return func(yield func(netip.Prefix, []Node) bool) {
-		prefixes := slices.SortedFunc(maps.Keys(rt), netip.Prefix.Compare)
+		prefixes := slices.SortedFunc(maps.Keys(rt), godownnetip.PrefixCompare)
 		for _, p := range prefixes {
 			if !yield(p, rt[p]) {
 				return

@@ -16,6 +16,7 @@ import (
 	"strings"
 
 	"github.com/google/nftables"
+	godownnftables "github.com/google/nftables"
 	"github.com/google/nftables/expr"
 	"github.com/sagernet/tailscale/net/tsaddr"
 	"github.com/sagernet/tailscale/types/logger"
@@ -991,7 +992,7 @@ const (
 // via netfilter via nftables, as a last resort measure to detect that nftables
 // can be used. It cleans up the dummy chains after creation.
 func (n *nftablesRunner) createDummyPostroutingChains() (retErr error) {
-	polAccept := new(nftables.ChainPolicyAccept)
+	polAccept := func() *godownnftables.ChainPolicy { godownValue := nftables.ChainPolicyAccept; return &godownValue }()
 	for _, table := range n.getTables() {
 		nat, err := createTableIfNotExist(n.conn, table.Proto, tsDummyTableName)
 		if err != nil {

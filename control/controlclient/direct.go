@@ -47,6 +47,7 @@ import (
 	"github.com/sagernet/tailscale/net/tsdial"
 	"github.com/sagernet/tailscale/syncs"
 	"github.com/sagernet/tailscale/tailcfg"
+	godowntailcfg "github.com/sagernet/tailscale/tailcfg"
 	"github.com/sagernet/tailscale/tailcfg/nodecap"
 	"github.com/sagernet/tailscale/tka"
 	"github.com/sagernet/tailscale/tstime"
@@ -444,7 +445,7 @@ func (c *Direct) SetHostinfo(hi *tailcfg.Hostinfo) bool {
 	if hi == nil {
 		panic("nil Hostinfo")
 	}
-	hi = new(*hi)
+	hi = func() *godowntailcfg.Hostinfo { godownValue := *hi; return &godownValue }()
 	hi.NetInfo = nil
 	c.mu.Lock()
 	defer c.mu.Unlock()

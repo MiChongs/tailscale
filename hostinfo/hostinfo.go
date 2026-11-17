@@ -23,6 +23,7 @@ import (
 	"github.com/sagernet/tailscale/tailcfg"
 	"github.com/sagernet/tailscale/types/lazy"
 	"github.com/sagernet/tailscale/types/opt"
+	godownopt "github.com/sagernet/tailscale/types/opt"
 	"github.com/sagernet/tailscale/util/cloudenv"
 	"github.com/sagernet/tailscale/util/dnsname"
 	"github.com/sagernet/tailscale/util/lineiter"
@@ -94,8 +95,8 @@ func condCall[T any](fn func() T) T {
 }
 
 var (
-	lazyInContainer = &lazyAtomicValue[opt.Bool]{f: new(inContainer)}
-	lazyGoArchVar   = &lazyAtomicValue[string]{f: new(goArchVar)}
+	lazyInContainer = &lazyAtomicValue[opt.Bool]{f: func() *func() godownopt.Bool { godownValue := inContainer; return &godownValue }()}
+	lazyGoArchVar   = &lazyAtomicValue[string]{f: func() *func() string { godownValue := goArchVar; return &godownValue }()}
 )
 
 type lazyAtomicValue[T any] struct {

@@ -6,7 +6,7 @@
 package main
 
 import (
-	"errors"
+	godownerrors "github.com/sagernet/tailscale/internal/godown/std/errors"
 	"os"
 	"os/exec"
 )
@@ -21,7 +21,7 @@ func doExec(cmd string, args []string, env []string) error {
 
 	// Propagate ExitErrors within this func to give us similar semantics to
 	// the Unix variant.
-	if ee, ok := errors.AsType[*exec.ExitError](err); ok {
+	if ee, ok := godownerrors.AsType[*exec.ExitError](err); ok {
 		os.Exit(ee.ExitCode())
 	}
 
