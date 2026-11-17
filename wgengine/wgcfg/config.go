@@ -8,8 +8,8 @@ import (
 	"net/netip"
 	"slices"
 
+	"github.com/sagernet/tailscale/types/key"
 	"github.com/tailscale/wireguard-go/device"
-	"tailscale.com/types/key"
 )
 
 //go:generate go run tailscale.com/cmd/cloner -type=Config

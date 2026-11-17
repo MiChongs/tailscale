@@ -16,8 +16,8 @@ import (
 	"path/filepath"
 
 	"github.com/klauspost/compress/zstd"
+	"github.com/sagernet/tailscale/tsweb/compserve"
 	"golang.org/x/sync/errgroup"
-	"tailscale.com/tsweb/compserve"
 )
 
 // PrecompressDir compresses static assets in dirPath using Zstandard.

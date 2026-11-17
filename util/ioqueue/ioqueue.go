@@ -232,8 +232,8 @@ func (ws *offsetWaiters) wait(offsetNow, offsetTarget int64, closed bool) <-chan
 // (offsetNow exceeds the waiter's offsetTarget) or by closed.
 func (ws *offsetWaiters) notify(offsetNow int64, closed bool) {
 	for len(ws.waiters) > 0 && (offsetNow > ws.waiters[0].offsetTarget || closed) {
-		close((ws.waiters)[0].done)
-		(ws.waiters)[0].done = nil
+		close(ws.waiters[0].done)
+		ws.waiters[0].done = nil
 		ws.waiters = ws.waiters[1:]
 	}
 }

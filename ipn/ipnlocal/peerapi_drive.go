@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"tailscale.com/drive"
-	"tailscale.com/tailcfg/peercap"
-	"tailscale.com/util/httpm"
+	"github.com/sagernet/tailscale/drive"
+	"github.com/sagernet/tailscale/tailcfg/peercap"
+	"github.com/sagernet/tailscale/util/httpm"
 )
 
 const (

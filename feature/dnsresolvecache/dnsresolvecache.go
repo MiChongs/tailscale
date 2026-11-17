@@ -51,12 +51,12 @@ import (
 	"strings"
 	"sync"
 
-	"tailscale.com/atomicfile"
-	"tailscale.com/feature"
-	"tailscale.com/net/dnscache"
-	"tailscale.com/types/logger"
-	"tailscale.com/util/mak"
-	"tailscale.com/util/set"
+	"github.com/sagernet/tailscale/atomicfile"
+	"github.com/sagernet/tailscale/feature"
+	"github.com/sagernet/tailscale/net/dnscache"
+	"github.com/sagernet/tailscale/types/logger"
+	"github.com/sagernet/tailscale/util/mak"
+	"github.com/sagernet/tailscale/util/set"
 )
 
 func init() {
@@ -109,7 +109,7 @@ func setCacheDir(dir string, lf logger.Logf) {
 		}
 		return
 	}
-	if err := os.MkdirAll(dir, 0700); err != nil {
+	if err := os.MkdirAll(dir, 0o700); err != nil {
 		lf("dnsresolvecache: %v", err)
 		return
 	}
@@ -193,7 +193,7 @@ func writeLocked(host string, j []byte) {
 		mak.Set(&lastWritten, host, string(digest[:]))
 		return
 	}
-	if err := atomicfile.WriteFile(path, j, 0600); err != nil {
+	if err := atomicfile.WriteFile(path, j, 0o600); err != nil {
 		logf("dnsresolvecache: writing %v: %v", path, err)
 		return
 	}

@@ -20,10 +20,10 @@ import (
 	"time"
 	"unsafe"
 
+	"github.com/sagernet/tailscale/util/dirwalk"
+	"github.com/sagernet/tailscale/util/mak"
 	"go4.org/mem"
 	"golang.org/x/sys/unix"
-	"tailscale.com/util/dirwalk"
-	"tailscale.com/util/mak"
 )
 
 func init() {
@@ -532,9 +532,11 @@ func allZero(b []byte) bool {
 	}
 	return true
 }
+
 func isDiagV4Localhost(b []byte, family uint8) bool {
 	return family == unix.AF_INET && b[0] == 127 && b[1] == 0 && b[2] == 0 && b[3] == 1 && allZero(b[4:])
 }
+
 func isDiagV6Localhost(b []byte, family uint8) bool {
 	return family == unix.AF_INET6 && allZero(b[:15]) && b[15] == 1
 }

@@ -8,7 +8,7 @@
 package osshare
 
 import (
-	"tailscale.com/types/logger"
+	"github.com/sagernet/tailscale/types/logger"
 )
 
 func SetFileSharingEnabled(enabled bool, logf logger.Logf) {}

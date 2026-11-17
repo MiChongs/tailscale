@@ -14,16 +14,13 @@ import (
 	jsonv2 "github.com/go-json-experiment/json"
 	"github.com/go-json-experiment/json/jsontext"
 	jsonv1 "github.com/go-json-experiment/json/v1"
-
-	"tailscale.com/net/routecheck/peernode"
-	"tailscale.com/tailcfg"
-	"tailscale.com/util/clientmetric"
-	"tailscale.com/util/mak"
+	"github.com/sagernet/tailscale/net/routecheck/peernode"
+	"github.com/sagernet/tailscale/tailcfg"
+	"github.com/sagernet/tailscale/util/clientmetric"
+	"github.com/sagernet/tailscale/util/mak"
 )
 
-var (
-	metricReport = clientmetric.NewCounter("routecheck_report")
-)
+var metricReport = clientmetric.NewCounter("routecheck_report")
 
 // Report returns the latest reachability report.
 // It returns nil if a report isn’t available, which happens during initialization.
@@ -145,7 +142,6 @@ func (ns *NodeSet) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON implements [jsonv1.Unmarshaler].
 func (ns *NodeSet) UnmarshalJSON(b []byte) error {
 	return jsonv2.Unmarshal(b, ns, jsonv1.DefaultOptionsV1())
-
 }
 
 // RoutablePrefixes is a map of routers,

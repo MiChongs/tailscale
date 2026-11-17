@@ -6,8 +6,8 @@
 package wgengine
 
 import (
-	"tailscale.com/net/flowtrack"
-	"tailscale.com/net/packet"
+	"github.com/sagernet/tailscale/net/flowtrack"
+	"github.com/sagernet/tailscale/net/packet"
 )
 
 // notifyConnRejectTSMPRecv is a no-op when the connreject feature is

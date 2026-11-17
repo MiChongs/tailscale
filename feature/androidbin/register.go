@@ -6,8 +6,8 @@
 package androidbin
 
 import (
-	"tailscale.com/feature"
-	"tailscale.com/net/netmon"
+	"github.com/sagernet/tailscale/feature"
+	"github.com/sagernet/tailscale/net/netmon"
 )
 
 // The hook is not registered in GOOS=android cgo builds (the Android

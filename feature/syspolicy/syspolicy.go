@@ -5,9 +5,8 @@
 package syspolicy
 
 import (
-	"tailscale.com/feature"
-
-	_ "tailscale.com/util/syspolicy" // for its registration side effects
+	"github.com/sagernet/tailscale/feature"
+	_ "github.com/sagernet/tailscale/util/syspolicy" // for its registration side effects
 )
 
 func init() {

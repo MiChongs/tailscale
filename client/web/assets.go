@@ -15,9 +15,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/sagernet/tailscale/tsweb/compserve"
+	"github.com/sagernet/tailscale/tsweb/vcstime"
 	prebuilt "github.com/tailscale/web-client-prebuilt"
-	"tailscale.com/tsweb/compserve"
-	"tailscale.com/tsweb/vcstime"
 )
 
 func assetsHandler(devMode bool) (_ http.Handler, cleanup func()) {

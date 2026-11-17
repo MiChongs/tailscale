@@ -22,9 +22,9 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"tailscale.com/metrics"
-	"tailscale.com/syncs"
-	"tailscale.com/version"
+	"github.com/sagernet/tailscale/metrics"
+	"github.com/sagernet/tailscale/syncs"
+	"github.com/sagernet/tailscale/version"
 )
 
 // StaticStringVar returns a new expvar.Var that always returns s.

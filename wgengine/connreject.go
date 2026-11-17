@@ -6,8 +6,8 @@
 package wgengine
 
 import (
-	"tailscale.com/net/connreject"
-	"tailscale.com/syncs"
+	"github.com/sagernet/tailscale/net/connreject"
+	"github.com/sagernet/tailscale/syncs"
 )
 
 // connRejectState holds the connreject feature's per-engine storage.

@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"strings"
 
-	"tailscale.com/tailcfg"
-	"tailscale.com/tailcfg/nodecap"
-	"tailscale.com/types/appctype"
-	"tailscale.com/types/dnstype"
+	"github.com/sagernet/tailscale/tailcfg"
+	"github.com/sagernet/tailscale/tailcfg/nodecap"
+	"github.com/sagernet/tailscale/types/appctype"
+	"github.com/sagernet/tailscale/types/dnstype"
 )
 
 const AppConnectorsExperimentalAttrName = "tailscale.com/app-connectors-experimental"

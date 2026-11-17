@@ -11,10 +11,10 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/sagernet/tailscale/envknob"
+	"github.com/sagernet/tailscale/net/tsaddr"
+	"github.com/sagernet/tailscale/util/clientmetric"
 	"go4.org/netipx"
-	"tailscale.com/envknob"
-	"tailscale.com/net/tsaddr"
-	"tailscale.com/util/clientmetric"
 )
 
 // v4BroadcastAddr is 255.255.255.255, the limited broadcast address.

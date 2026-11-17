@@ -12,8 +12,8 @@ import (
 	"fmt"
 
 	"github.com/illarion/gonotify/v3"
-	"tailscale.com/feature"
-	"tailscale.com/net/dns"
+	"github.com/sagernet/tailscale/feature"
+	"github.com/sagernet/tailscale/net/dns"
 )
 
 func init() {

@@ -16,15 +16,17 @@ import (
 	"sync"
 	"time"
 
-	"tailscale.com/util/mak"
-	"tailscale.com/util/singleflight"
+	"github.com/sagernet/tailscale/util/mak"
+	"github.com/sagernet/tailscale/util/singleflight"
 )
 
-const expiresSoon = 7 * 24 * time.Hour // 7 days from now
-// Let’s Encrypt promises to issue certificates with CRL servers after 2025-05-07:
-// https://letsencrypt.org/2024/12/05/ending-ocsp/
-// https://github.com/tailscale/tailscale/issues/15912
-const letsEncryptStartedStaplingCRL int64 = 1746576000 // 2025-05-07 00:00:00 UTC
+const (
+	expiresSoon = 7 * 24 * time.Hour // 7 days from now
+	// Let’s Encrypt promises to issue certificates with CRL servers after 2025-05-07:
+	// https://letsencrypt.org/2024/12/05/ending-ocsp/
+	// https://github.com/tailscale/tailscale/issues/15912
+	letsEncryptStartedStaplingCRL int64 = 1746576000 // 2025-05-07 00:00:00 UTC
+)
 
 // TLS returns a Probe that healthchecks a TLS endpoint.
 //

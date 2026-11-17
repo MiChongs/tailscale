@@ -19,7 +19,7 @@ import (
 	"io"
 	"net/http"
 
-	"tailscale.com/util/ctxkey"
+	"github.com/sagernet/tailscale/util/ctxkey"
 )
 
 // ErrTooLarge is reported by a body wrapped with [LimitSize] once more

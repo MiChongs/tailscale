@@ -8,17 +8,17 @@ package captivedetection
 import (
 	"syscall"
 
+	"github.com/sagernet/tailscale/types/logger"
 	"golang.org/x/sys/unix"
-	"tailscale.com/types/logger"
 )
 
 // setSocketInterfaceIndex sets the IP_BOUND_IF socket option on the given RawConn.
 // This forces the socket to use the given interface.
 func setSocketInterfaceIndex(c syscall.RawConn, ifIndex int, logf logger.Logf) error {
-	return c.Control((func(fd uintptr) {
+	return c.Control(func(fd uintptr) {
 		err := unix.SetsockoptInt(int(fd), unix.IPPROTO_IP, unix.IP_BOUND_IF, ifIndex)
 		if err != nil {
 			logf("captivedetection: failed to set IP_BOUND_IF (ifIndex=%d): %v", ifIndex, err)
 		}
-	}))
+	})
 }

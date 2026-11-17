@@ -9,7 +9,7 @@ import (
 	"slices"
 	"strconv"
 
-	"tailscale.com/types/key"
+	"github.com/sagernet/tailscale/types/key"
 )
 
 // DERPMap describes the set of DERP packet relay servers that are available.

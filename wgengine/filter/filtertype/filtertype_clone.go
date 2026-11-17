@@ -8,11 +8,11 @@ package filtertype
 import (
 	"net/netip"
 
-	"tailscale.com/tailcfg"
-	"tailscale.com/tailcfg/nodecap"
-	"tailscale.com/tailcfg/peercap"
-	"tailscale.com/types/ipproto"
-	"tailscale.com/types/views"
+	"github.com/sagernet/tailscale/tailcfg"
+	"github.com/sagernet/tailscale/tailcfg/nodecap"
+	"github.com/sagernet/tailscale/tailcfg/peercap"
+	"github.com/sagernet/tailscale/types/ipproto"
+	"github.com/sagernet/tailscale/types/views"
 )
 
 // Clone makes a deep copy of Match.

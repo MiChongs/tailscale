@@ -207,8 +207,10 @@ func numOverhead(src []byte) (n int) {
 	return n
 }
 
-var errUnexpectedEOF = errors.New("cobs: unexpected truncation")
-var errUnexpectedNull = errors.New("cobs: unexpected null byte")
+var (
+	errUnexpectedEOF  = errors.New("cobs: unexpected truncation")
+	errUnexpectedNull = errors.New("cobs: unexpected null byte")
+)
 
 // AppendDecode appends the decoded bytes of src to the end of dst.
 // The COBS-encoded src must not contain the trailing null terminator byte;

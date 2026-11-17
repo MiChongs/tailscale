@@ -8,7 +8,7 @@ import (
 	"math/bits"
 	"sync"
 
-	"tailscale.com/types/bools"
+	"github.com/sagernet/tailscale/types/bools"
 )
 
 // Statically verify that VolatileBuffer implements Buffer.

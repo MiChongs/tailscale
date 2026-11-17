@@ -5,7 +5,7 @@
 
 package tstun
 
-import "tailscale.com/net/packet"
+import "github.com/sagernet/tailscale/net/packet"
 
 // connRejectState is the omit-build counterpart of the type in
 // connreject.go. It is an empty struct so the Wrapper's connReject

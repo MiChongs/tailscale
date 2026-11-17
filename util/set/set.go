@@ -11,7 +11,7 @@ import (
 	"reflect"
 	"sort"
 
-	"tailscale.com/types/views"
+	"github.com/sagernet/tailscale/types/views"
 )
 
 // Set is a set of T.

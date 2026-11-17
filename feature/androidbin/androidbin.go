@@ -44,9 +44,8 @@ import (
 	"runtime"
 	"time"
 
-	"tailscale.com/net/netmon"
-
-	_ "tailscale.com/feature/androiddns"
+	_ "github.com/sagernet/tailscale/feature/androiddns"
+	"github.com/sagernet/tailscale/net/netmon"
 )
 
 // fallbackInterfaces implements netmon.HookInterfacesFallback. It

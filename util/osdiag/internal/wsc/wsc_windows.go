@@ -16,9 +16,7 @@ import (
 	"github.com/dblohm7/wingoes/com/automation"
 )
 
-var (
-	CLSID_WSCProductList = &com.CLSID{0x17072F7B, 0x9ABE, 0x4A74, [8]byte{0xA2, 0x61, 0x1E, 0xB7, 0x6B, 0x55, 0x10, 0x7A}}
-)
+var CLSID_WSCProductList = &com.CLSID{0x17072F7B, 0x9ABE, 0x4A74, [8]byte{0xA2, 0x61, 0x1E, 0xB7, 0x6B, 0x55, 0x10, 0x7A}}
 
 var (
 	IID_IWSCProductList = &com.IID{0x722A338C, 0x6E8E, 0x4E72, [8]byte{0xAC, 0x27, 0x14, 0x17, 0xFB, 0x0C, 0x81, 0xC2}}
@@ -174,37 +172,37 @@ type WscProduct struct {
 }
 
 func (o WscProduct) GetProductName() (pVal string, err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.GetProductName()
 }
 
 func (o WscProduct) GetProductState() (val WSC_SECURITY_PRODUCT_STATE, err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.GetProductState()
 }
 
 func (o WscProduct) GetSignatureStatus() (val WSC_SECURITY_SIGNATURE_STATUS, err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.GetSignatureStatus()
 }
 
 func (o WscProduct) GetRemediationPath() (pVal string, err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.GetRemediationPath()
 }
 
 func (o WscProduct) GetProductStateTimestamp() (pVal string, err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.GetProductStateTimestamp()
 }
 
 func (o WscProduct) GetProductGuid() (pVal string, err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.GetProductGuid()
 }
 
 func (o WscProduct) GetProductIsDefault() (pVal bool, err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.GetProductIsDefault()
 }
 
@@ -233,7 +231,7 @@ func (o WscProduct) MakeFromKnownABI(r **IWscProductABI) WscProduct {
 }
 
 func (o WscProduct) UnsafeUnwrap() *IWscProductABI {
-	return *(o.Pp)
+	return *o.Pp
 }
 
 type IWSCProductListABI struct {
@@ -280,17 +278,17 @@ type WSCProductList struct {
 }
 
 func (o WSCProductList) Initialize(provider WSC_SECURITY_PROVIDER) (err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.Initialize(provider)
 }
 
 func (o WSCProductList) GetCount() (val int32, err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.GetCount()
 }
 
 func (o WSCProductList) GetItem(index uint32) (val WscProduct, err error) {
-	p := *(o.Pp)
+	p := *o.Pp
 	return p.GetItem(index)
 }
 
@@ -310,5 +308,5 @@ func (o WSCProductList) Make(r com.ABIReceiver) any {
 }
 
 func (o WSCProductList) UnsafeUnwrap() *IWSCProductListABI {
-	return *(o.Pp)
+	return *o.Pp
 }

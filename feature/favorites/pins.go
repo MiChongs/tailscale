@@ -7,8 +7,8 @@ import (
 	"encoding/json"
 	"errors"
 
-	"tailscale.com/feature/favorites/pintype"
-	"tailscale.com/ipn"
+	"github.com/sagernet/tailscale/feature/favorites/pintype"
+	"github.com/sagernet/tailscale/ipn"
 )
 
 // currentPins returns the saved pinned favorites for the current profile, or a zero [pintype.Set]

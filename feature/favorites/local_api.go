@@ -7,10 +7,10 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"tailscale.com/feature/favorites/pintype"
-	"tailscale.com/ipn/ipnlocal"
-	"tailscale.com/ipn/localapi"
-	"tailscale.com/util/httpm"
+	"github.com/sagernet/tailscale/feature/favorites/pintype"
+	"github.com/sagernet/tailscale/ipn/ipnlocal"
+	"github.com/sagernet/tailscale/ipn/localapi"
+	"github.com/sagernet/tailscale/util/httpm"
 )
 
 // servePins handles GET and POST /localapi/v0/pins for the current profile: GET returns the pinned

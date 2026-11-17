@@ -17,15 +17,15 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"tailscale.com/feature"
-	"tailscale.com/ipn/ipnext"
-	"tailscale.com/ipn/ipnlocal"
-	"tailscale.com/ipn/localapi"
-	"tailscale.com/net/connreject"
-	"tailscale.com/tailcfg"
-	"tailscale.com/tailcfg/nodecap"
-	"tailscale.com/types/logger"
-	"tailscale.com/util/httpm"
+	"github.com/sagernet/tailscale/feature"
+	"github.com/sagernet/tailscale/ipn/ipnext"
+	"github.com/sagernet/tailscale/ipn/ipnlocal"
+	"github.com/sagernet/tailscale/ipn/localapi"
+	"github.com/sagernet/tailscale/net/connreject"
+	"github.com/sagernet/tailscale/tailcfg"
+	"github.com/sagernet/tailscale/tailcfg/nodecap"
+	"github.com/sagernet/tailscale/types/logger"
+	"github.com/sagernet/tailscale/util/httpm"
 )
 
 // featureName is the feature tag used for feature.Register and the

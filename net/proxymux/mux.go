@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"tailscale.com/types/nettype"
+	"github.com/sagernet/tailscale/types/nettype"
 )
 
 // SplitSOCKSAndHTTP accepts connections on ln and passes connections

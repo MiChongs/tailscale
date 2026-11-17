@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"tailscale.com/derp"
-	"tailscale.com/net/netutil"
+	"github.com/sagernet/tailscale/derp"
+	"github.com/sagernet/tailscale/net/netutil"
 )
 
 // Handler returns an http.Handler to be mounted at /derp, serving s.

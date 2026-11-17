@@ -7,7 +7,7 @@ package featuretags
 import (
 	"slices"
 
-	"tailscale.com/util/set"
+	"github.com/sagernet/tailscale/util/set"
 )
 
 // CLI is a special feature in the [Features] map that works opposite

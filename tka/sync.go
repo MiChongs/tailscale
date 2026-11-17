@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"os"
 
-	"tailscale.com/util/testenv"
+	"github.com/sagernet/tailscale/util/testenv"
 )
 
 // ErrNoIntersection is returned when a shared AUM could

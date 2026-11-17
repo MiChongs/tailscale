@@ -11,7 +11,7 @@ import (
 	"syscall"
 	"time"
 
-	"tailscale.com/syncs"
+	"github.com/sagernet/tailscale/syncs"
 )
 
 // blockForeverConn is a net.PacketConn whose reads block until it is closed.
@@ -51,7 +51,10 @@ func (c *blockForeverConn) Close() error {
 	return nil
 }
 
-func (c *blockForeverConn) SetDeadline(t time.Time) error         { return errors.New("unimplemented") }
-func (c *blockForeverConn) SetReadDeadline(t time.Time) error     { return errors.New("unimplemented") }
-func (c *blockForeverConn) SetWriteDeadline(t time.Time) error    { return errors.New("unimplemented") }
+func (c *blockForeverConn) SetDeadline(t time.Time) error { return errors.New("unimplemented") }
+
+func (c *blockForeverConn) SetReadDeadline(t time.Time) error { return errors.New("unimplemented") }
+
+func (c *blockForeverConn) SetWriteDeadline(t time.Time) error { return errors.New("unimplemented") }
+
 func (c *blockForeverConn) SyscallConn() (syscall.RawConn, error) { return nil, errUnsupportedConnType }

@@ -10,7 +10,7 @@ import (
 	"os"
 	"runtime"
 
-	"tailscale.com/feature"
+	"github.com/sagernet/tailscale/feature"
 )
 
 // This init runs in GOOS=android builds without cgo and in all

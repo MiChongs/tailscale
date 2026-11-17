@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"strings"
 
-	"tailscale.com/util/httpm"
+	"github.com/sagernet/tailscale/util/httpm"
 )
 
 // CompressWriter wraps w so that its response body is transparently

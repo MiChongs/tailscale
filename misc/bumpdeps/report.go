@@ -60,8 +60,10 @@ func githubEnvFromOS() (*githubEnv, error) {
 	return env, nil
 }
 
-var issueURLRx = regexp.MustCompile(`^https://github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/([0-9]+)$`)
-var issueShortRx = regexp.MustCompile(`^([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)?#([0-9]+)$`)
+var (
+	issueURLRx   = regexp.MustCompile(`^https://github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/([0-9]+)$`)
+	issueShortRx = regexp.MustCompile(`^([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)?#([0-9]+)$`)
+)
 
 // parseIssueRef turns an issue given as a GitHub URL, "#123", or
 // "owner/repo#123" into the short form used in commit messages: "#123"

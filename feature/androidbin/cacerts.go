@@ -8,7 +8,7 @@ package androidbin
 import (
 	"os"
 
-	"tailscale.com/feature"
+	"github.com/sagernet/tailscale/feature"
 )
 
 // Android keeps its CA roots in /system/etc/security/cacerts as PEM

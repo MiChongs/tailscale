@@ -9,7 +9,7 @@ import (
 	"context"
 	"net/http"
 
-	"tailscale.com/feature/favorites/pintype"
+	"github.com/sagernet/tailscale/feature/favorites/pintype"
 )
 
 // GetPins returns the current profile's locally-pinned favorites.

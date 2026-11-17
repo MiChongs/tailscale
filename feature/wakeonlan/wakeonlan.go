@@ -15,13 +15,13 @@ import (
 	"unicode"
 
 	"github.com/kortschak/wol"
-	"tailscale.com/envknob"
-	"tailscale.com/feature"
-	"tailscale.com/hostinfo"
-	"tailscale.com/ipn/ipnlocal"
-	"tailscale.com/tailcfg"
-	"tailscale.com/tailcfg/peercap"
-	"tailscale.com/util/clientmetric"
+	"github.com/sagernet/tailscale/envknob"
+	"github.com/sagernet/tailscale/feature"
+	"github.com/sagernet/tailscale/hostinfo"
+	"github.com/sagernet/tailscale/ipn/ipnlocal"
+	"github.com/sagernet/tailscale/tailcfg"
+	"github.com/sagernet/tailscale/tailcfg/peercap"
+	"github.com/sagernet/tailscale/util/clientmetric"
 )
 
 func init() {

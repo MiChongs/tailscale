@@ -9,11 +9,11 @@ import (
 	"net/netip"
 	"strings"
 
-	"tailscale.com/tailcfg"
-	"tailscale.com/tailcfg/nodecap"
-	"tailscale.com/tailcfg/peercap"
-	"tailscale.com/types/ipproto"
-	"tailscale.com/types/views"
+	"github.com/sagernet/tailscale/tailcfg"
+	"github.com/sagernet/tailscale/tailcfg/nodecap"
+	"github.com/sagernet/tailscale/tailcfg/peercap"
+	"github.com/sagernet/tailscale/types/ipproto"
+	"github.com/sagernet/tailscale/types/views"
 )
 
 //go:generate go run tailscale.com/cmd/cloner --type=Match,CapMatch

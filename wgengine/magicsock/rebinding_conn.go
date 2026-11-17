@@ -11,12 +11,12 @@ import (
 	"sync/atomic"
 	"syscall"
 
-	"tailscale.com/control/controlknobs"
-	"tailscale.com/net/batching"
-	"tailscale.com/net/netaddr"
-	"tailscale.com/net/packet"
-	"tailscale.com/syncs"
-	"tailscale.com/types/nettype"
+	"github.com/sagernet/tailscale/control/controlknobs"
+	"github.com/sagernet/tailscale/net/batching"
+	"github.com/sagernet/tailscale/net/netaddr"
+	"github.com/sagernet/tailscale/net/packet"
+	"github.com/sagernet/tailscale/syncs"
+	"github.com/sagernet/tailscale/types/nettype"
 )
 
 // RebindingUDPConn is a UDP socket that can be re-bound.

@@ -8,7 +8,7 @@ import (
 	"errors"
 	"net/netip"
 
-	"tailscale.com/types/ipproto"
+	"github.com/sagernet/tailscale/types/ipproto"
 )
 
 // ip4HeaderLength is the length of an IPv4 header with no IP options.
@@ -41,7 +41,7 @@ func (h IP4Header) Marshal(buf []byte) error {
 		return errWrongFamily
 	}
 
-	buf[0] = 0x40 | (byte(h.Len() >> 2))                   // IPv4 + IHL
+	buf[0] = 0x40 | byte(h.Len()>>2)                       // IPv4 + IHL
 	buf[1] = 0x00                                          // DSCP + ECN
 	binary.BigEndian.PutUint16(buf[2:4], uint16(len(buf))) // Total length
 	binary.BigEndian.PutUint16(buf[4:6], h.IPID)           // ID

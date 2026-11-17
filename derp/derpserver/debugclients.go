@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	"tailscale.com/types/key"
+	"github.com/sagernet/tailscale/types/key"
 )
 
 const (

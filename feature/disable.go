@@ -9,8 +9,8 @@ import (
 	"strings"
 	"sync"
 
-	"tailscale.com/envknob"
-	"tailscale.com/util/set"
+	"github.com/sagernet/tailscale/envknob"
+	"github.com/sagernet/tailscale/util/set"
 )
 
 // disabledEnv is the TS_DISABLE_FEATURE environment variable: a comma

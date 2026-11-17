@@ -17,11 +17,11 @@ import (
 	"net/netip"
 	"slices"
 
-	"tailscale.com/ipn"
-	"tailscale.com/ipn/ipnstate"
-	"tailscale.com/kube/kubetypes"
-	klc "tailscale.com/kube/localclient"
-	"tailscale.com/tailcfg"
+	"github.com/sagernet/tailscale/ipn"
+	"github.com/sagernet/tailscale/ipn/ipnstate"
+	"github.com/sagernet/tailscale/kube/kubetypes"
+	klc "github.com/sagernet/tailscale/kube/localclient"
+	"github.com/sagernet/tailscale/tailcfg"
 )
 
 const (

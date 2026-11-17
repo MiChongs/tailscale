@@ -19,7 +19,7 @@ import (
 	"os"
 	"strings"
 
-	"tailscale.com/misc/git_hook/githook"
+	"github.com/sagernet/tailscale/misc/git_hook/githook"
 )
 
 // maxPushBlobSize is the largest new or changed blob allowed in a

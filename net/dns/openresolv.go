@@ -14,8 +14,8 @@ import (
 	"slices"
 	"strings"
 
-	"tailscale.com/net/tsaddr"
-	"tailscale.com/types/logger"
+	"github.com/sagernet/tailscale/net/tsaddr"
+	"github.com/sagernet/tailscale/types/logger"
 )
 
 // openresolvManager manages DNS configuration using the openresolv

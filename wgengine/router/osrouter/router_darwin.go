@@ -3,7 +3,7 @@
 
 package osrouter
 
-import "tailscale.com/wgengine/router"
+import "github.com/sagernet/tailscale/wgengine/router"
 
 func init() {
 	router.HookNewUserspaceRouter.Set(func(opts router.NewOpts) (router.Router, error) {

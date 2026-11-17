@@ -8,7 +8,7 @@ package pintype
 import (
 	"slices"
 
-	"tailscale.com/tailcfg"
+	"github.com/sagernet/tailscale/tailcfg"
 )
 
 // Set holds the user's locally-pinned favorites, grouped by category. Pins are per-device, not

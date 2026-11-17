@@ -11,12 +11,11 @@ import (
 
 	jsonv2 "github.com/go-json-experiment/json"
 	jsonv1 "github.com/go-json-experiment/json/v1"
-
-	"tailscale.com/ipn/ipnlocal"
-	"tailscale.com/ipn/localapi"
-	"tailscale.com/net/routecheck"
-	"tailscale.com/util/def"
-	"tailscale.com/util/httpm"
+	"github.com/sagernet/tailscale/ipn/ipnlocal"
+	"github.com/sagernet/tailscale/ipn/localapi"
+	"github.com/sagernet/tailscale/net/routecheck"
+	"github.com/sagernet/tailscale/util/def"
+	"github.com/sagernet/tailscale/util/httpm"
 )
 
 // ServeRouteCheck handles the API endpoint that serves the routecheck Report.

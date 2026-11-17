@@ -15,13 +15,13 @@ import (
 	"sync"
 	"time"
 
-	"tailscale.com/feature"
-	"tailscale.com/ipn/localapi"
-	"tailscale.com/net/netmon"
-	"tailscale.com/net/portmapper"
-	"tailscale.com/types/logger"
-	"tailscale.com/util/def"
-	"tailscale.com/util/eventbus"
+	"github.com/sagernet/tailscale/feature"
+	"github.com/sagernet/tailscale/ipn/localapi"
+	"github.com/sagernet/tailscale/net/netmon"
+	"github.com/sagernet/tailscale/net/portmapper"
+	"github.com/sagernet/tailscale/types/logger"
+	"github.com/sagernet/tailscale/util/def"
+	"github.com/sagernet/tailscale/util/eventbus"
 )
 
 func init() {

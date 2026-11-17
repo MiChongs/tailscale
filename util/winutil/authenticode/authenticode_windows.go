@@ -357,11 +357,13 @@ func queryEmbeddedCertSubject(utf16Path *uint16, verify bool) (string, error) {
 
 var (
 	_BCRYPT_SHA256_ALGORITHM   = &([]uint16{'S', 'H', 'A', '2', '5', '6', 0})[0]
-	_OID_CERT_STRONG_SIGN_OS_1 = &([]byte("1.3.6.1.4.1.311.72.1.1\x00"))[0]
+	_OID_CERT_STRONG_SIGN_OS_1 = &[]byte("1.3.6.1.4.1.311.72.1.1\x00")[0]
 )
 
-type _HCATADMIN windows.Handle
-type _HCATINFO windows.Handle
+type (
+	_HCATADMIN windows.Handle
+	_HCATINFO  windows.Handle
+)
 
 type _CATALOG_INFO struct {
 	size        uint32

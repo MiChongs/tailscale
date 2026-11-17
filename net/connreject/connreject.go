@@ -33,7 +33,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"tailscale.com/types/ipproto"
+	"github.com/sagernet/tailscale/types/ipproto"
 )
 
 // Direction describes whether a rejection applied to a connection this

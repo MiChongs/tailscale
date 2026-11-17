@@ -8,14 +8,14 @@ import (
 	"net/netip"
 	"strings"
 
+	"github.com/sagernet/tailscale/net/ipset"
+	"github.com/sagernet/tailscale/net/netaddr"
+	"github.com/sagernet/tailscale/tailcfg"
+	"github.com/sagernet/tailscale/tailcfg/nodecap"
+	"github.com/sagernet/tailscale/tailcfg/peercap"
+	"github.com/sagernet/tailscale/types/ipproto"
+	"github.com/sagernet/tailscale/types/views"
 	"go4.org/netipx"
-	"tailscale.com/net/ipset"
-	"tailscale.com/net/netaddr"
-	"tailscale.com/tailcfg"
-	"tailscale.com/tailcfg/nodecap"
-	"tailscale.com/tailcfg/peercap"
-	"tailscale.com/types/ipproto"
-	"tailscale.com/types/views"
 )
 
 var defaultProtos = []ipproto.Proto{

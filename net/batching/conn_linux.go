@@ -18,16 +18,16 @@ import (
 	"time"
 	"unsafe"
 
+	"github.com/sagernet/tailscale/control/controlknobs"
+	"github.com/sagernet/tailscale/envknob"
+	"github.com/sagernet/tailscale/hostinfo"
+	"github.com/sagernet/tailscale/net/neterror"
+	"github.com/sagernet/tailscale/net/packet"
+	"github.com/sagernet/tailscale/types/nettype"
+	"github.com/sagernet/tailscale/util/clientmetric"
 	"golang.org/x/net/ipv4"
 	"golang.org/x/net/ipv6"
 	"golang.org/x/sys/unix"
-	"tailscale.com/control/controlknobs"
-	"tailscale.com/envknob"
-	"tailscale.com/hostinfo"
-	"tailscale.com/net/neterror"
-	"tailscale.com/net/packet"
-	"tailscale.com/types/nettype"
-	"tailscale.com/util/clientmetric"
 )
 
 // xnetBatchReaderWriter defines the batching i/o methods of
@@ -47,10 +47,8 @@ type xnetBatchWriter interface {
 	WriteBatch([]ipv6.Message, int) (int, error)
 }
 
-var (
-	// [linuxBatchingConn] implements [Conn].
-	_ Conn = (*linuxBatchingConn)(nil)
-)
+// [linuxBatchingConn] implements [Conn].
+var _ Conn = (*linuxBatchingConn)(nil)
 
 // linuxBatchingConn is a UDP socket that provides batched i/o. It implements
 // [Conn].
@@ -250,7 +248,7 @@ func (c *linuxBatchingConn) putMsgsBatch(batch *msgsBatch, usedMsgs int) {
 	// Clear references to previously used packet buffers, otherwise they
 	// may never be GC'd.
 	for i := range batch.msgs[:usedMsgs] {
-		clear((batch.msgs)[i].Buffers)
+		clear(batch.msgs[i].Buffers)
 		// Non-coalesced write paths access only batch.msgs[i].Buffers[0],
 		// but we append more during [linuxBatchingConn.coalesceMessages].
 		// Leave index zero accessible:

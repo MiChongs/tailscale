@@ -8,7 +8,7 @@ package linuxfw
 import (
 	"net/netip"
 
-	"tailscale.com/types/logger"
+	"github.com/sagernet/tailscale/types/logger"
 )
 
 // FakeNetfilterRunner is a fake netfilter runner for tests.
@@ -83,8 +83,11 @@ func (f *FakeNetfilterRunner) AddDNATRule(origDst, dst netip.Addr) error { retur
 func (f *FakeNetfilterRunner) DNATWithLoadBalancer(origDst netip.Addr, dsts []netip.Addr) error {
 	return nil
 }
-func (f *FakeNetfilterRunner) EnsureSNATForDst(src, dst netip.Addr) error               { return nil }
+
+func (f *FakeNetfilterRunner) EnsureSNATForDst(src, dst netip.Addr) error { return nil }
+
 func (f *FakeNetfilterRunner) DNATNonTailscaleTraffic(tun string, dst netip.Addr) error { return nil }
+
 func (f *FakeNetfilterRunner) ClampMSSToPMTU(tun string, addr netip.Addr) error {
 	f.clampedAddrs = append(f.clampedAddrs, addr)
 	return nil
@@ -99,11 +102,15 @@ func (f *FakeNetfilterRunner) DelMagicsockPortRule(port uint16, network string) 
 func (f *FakeNetfilterRunner) DeletePortMapRuleForSvc(svc, tun string, targetIP netip.Addr, pm PortMap) error {
 	return nil
 }
+
 func (f *FakeNetfilterRunner) DeleteSvc(svc, tun string, targetIPs []netip.Addr, pms []PortMap) error {
 	return nil
 }
+
 func (f *FakeNetfilterRunner) EnsurePortMapRuleForSvc(svc, tun string, targetIP netip.Addr, pm PortMap) error {
 	return nil
 }
+
 func (f *FakeNetfilterRunner) AddExternalCGNATRules(mode CGNATMode, tunname string) error { return nil }
+
 func (f *FakeNetfilterRunner) DelExternalCGNATRules(mode CGNATMode, tunname string) error { return nil }

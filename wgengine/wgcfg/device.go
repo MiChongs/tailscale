@@ -6,11 +6,11 @@ package wgcfg
 import (
 	"fmt"
 
+	"github.com/sagernet/tailscale/types/logger"
+	"github.com/sagernet/tailscale/util/clientmetric"
 	"github.com/tailscale/wireguard-go/conn"
 	"github.com/tailscale/wireguard-go/device"
 	"github.com/tailscale/wireguard-go/tun"
-	"tailscale.com/types/logger"
-	"tailscale.com/util/clientmetric"
 )
 
 // NewDevice returns a wireguard-go Device configured for Tailscale use.

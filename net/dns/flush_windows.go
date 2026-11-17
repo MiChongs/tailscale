@@ -9,8 +9,8 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/sagernet/tailscale/util/coalescedop"
 	"golang.org/x/sys/windows"
-	"tailscale.com/util/coalescedop"
 )
 
 var (

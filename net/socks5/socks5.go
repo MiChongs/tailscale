@@ -26,9 +26,9 @@ import (
 	"strconv"
 	"time"
 
-	"tailscale.com/syncs"
-	"tailscale.com/types/logger"
-	"tailscale.com/types/nettype"
+	"github.com/sagernet/tailscale/syncs"
+	"github.com/sagernet/tailscale/types/logger"
+	"github.com/sagernet/tailscale/types/nettype"
 )
 
 // Authentication METHODs described in RFC 1928, section 3.
